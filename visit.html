@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Personal Homepage</title>
+    <style>
+        /* 基本样式 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3e5f5; /* 淡紫色背景 */
+            color: #4a148c; /* 深紫色字体 */
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            background-color: #7b1fa2; /* 紫色导航栏背景 */
+            color: white;
+            padding: 1em;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5em 1em;
+            transition: background-color 0.3s;
+        }
+
+        .navbar a:hover, .navbar a.active {
+            background-color: #4a148c; /* 深紫色高亮 */
+        }
+
+        /* 内容样式 */
+        .content {
+            padding: 2em;
+        }
+
+        h1 {
+            color: #4a148c; /* 深紫色标题 */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航栏 -->
+    <header class="navbar">
+        <a href="index.html" class="nav-link" onclick="setActive(this)">Homepage</a>
+        <a href="research.html" class="nav-link" onclick="setActive(this)">Research</a>
+        <a href="publications.html" class="nav-link" onclick="setActive(this)">Publications</a>
+        <a href="blogs.html" class="nav-link" onclick="setActive(this)">Blogs</a>
+        <a href="visit.html" class="nav-link" onclick="setActive(this)">Visit</a>
+        <a href="collaborators.html" class="nav-link" onclick="setActive(this)">Collaborators</a>
+    </header>
+
+    <!-- 主内容 -->
+    <!-- Main Content -->
+    <div class="content">
+        <h2>自我介绍 / Self Introduction</h2>
+        <p>宋子骏，大连理工大学2021级本科生，目前在中科院软件研究所实习。请通过邮箱联系我：2949203143@mail.dlut.edu.cn。</p>
+
+        <h2>教育及工作经历 / Personal and Work Experience</h2>
+        
+        <h3>教育经历 / Personal Experience</h3>
+        <ul>
+            <li>2018.09-2021.06 大连市金州高级中学</li>
+            <li>2021.09-2025.06 大连理工大学软件学院</li>
+            <li>2025.09-2030.06 中国科学院大学前沿交叉科学学院</li>
+        </ul>
+        
+        <h3>工作经历 / Work Experience</h3>
+        <ul>
+            <li>2024.07-至今 清华大学NLP实验室刘知远老师组 科研实习</li>
+        </ul>
+
+        <h2>研究方向 / Research Interests</h2>
+        <ul>
+            <li><b>AI4Bio</b>
+            <li><b>LLM-enhanced RL</b>
+        </ul>
+
+        <h2>研究项目 / Research Projects</h2>
+        <p>暂无</p>
+
+        <h2>所获荣誉 / Honors</h2>
+        <p>暂无</p>
+
+        <h2>学术兼职 / Part-time Academic Job</h2>
+        <p>暂无</p>
+        
+        <div class="clear"></div>
+    </div>
+
+    <script>
+        // 设置导航栏高亮效果
+        function setActive(link) {
+            // 移除所有导航项的 active 类
+            const links = document.querySelectorAll('.navbar a');
+            links.forEach(item => item.classList.remove('active'));
+
+            // 为点击的链接添加 active 类
+            link.classList.add('active');
+        }
+    </script>
+
+</body>
