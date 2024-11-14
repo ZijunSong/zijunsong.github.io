@@ -16,11 +16,17 @@
 
         /* 导航栏样式 */
         .navbar {
-            background-color: #7b1fa2; /* 紫色导航栏背景 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%; /* 占满页面宽度 */
+            background-color: #7b1fa2; /* 导航栏背景颜色 */
             color: white;
             padding: 1em;
             display: flex;
             justify-content: space-around;
+            z-index: 1000; /* 确保导航栏在其他内容之上 */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
         }
 
         .navbar a {
@@ -43,6 +49,8 @@
             color: #4a148c; /* 深紫色标题 */
         }
     </style>
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
 
@@ -52,6 +60,7 @@
         <a href="research.html" class="nav-link" onclick="setActive(this)">Research</a>
         <a href="publications.html" class="nav-link" onclick="setActive(this)">Publications</a>
         <a href="blogs.html" class="nav-link" onclick="setActive(this)">Blogs</a>
+        <a href="recom_readings.html" class="nav-link" onclick="setActive(this)">Recommended Readings</a>
         <a href="visit.html" class="nav-link" onclick="setActive(this)">Visit</a>
         <a href="collaborators.html" class="nav-link" onclick="setActive(this)">Collaborators</a>
     </header>
@@ -59,39 +68,7 @@
     <!-- 主内容 -->
     <!-- Main Content -->
     <div class="content">
-        <h2>自我介绍 / Self Introduction</h2>
-        <p>宋子骏，大连理工大学2021级本科生，目前在中科院软件研究所实习。请通过邮箱联系我：2949203143@mail.dlut.edu.cn。</p>
-
-        <h2>教育及工作经历 / Personal and Work Experience</h2>
-        
-        <h3>教育经历 / Personal Experience</h3>
-        <ul>
-            <li>2018.09-2021.06 大连市金州高级中学</li>
-            <li>2021.09-2025.06 大连理工大学软件学院</li>
-            <li>2025.09-2030.06 中国科学院大学前沿交叉科学学院</li>
-        </ul>
-        
-        <h3>工作经历 / Work Experience</h3>
-        <ul>
-            <li>2024.07-至今 清华大学NLP实验室刘知远老师组 科研实习</li>
-        </ul>
-
-        <h2>研究方向 / Research Interests</h2>
-        <ul>
-            <li><b>AI4Bio</b>
-            <li><b>LLM-enhanced RL</b>
-        </ul>
-
-        <h2>研究项目 / Research Projects</h2>
-        <p>暂无</p>
-
-        <h2>所获荣誉 / Honors</h2>
-        <p>暂无</p>
-
-        <h2>学术兼职 / Part-time Academic Job</h2>
-        <p>暂无</p>
-        
-        <div class="clear"></div>
+        <p>Working</p>
     </div>
 
     <script>

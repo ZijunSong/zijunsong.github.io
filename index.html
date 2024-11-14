@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Personal Homepage</title>
+    <title>首页</title>
     <style>
         /* 基本样式 */
         body {
@@ -14,35 +14,27 @@
             color: #4a148c; /* 深紫色字体 */
         }
 
-        /* 导航栏样式 */
-        .navbar {
-            background-color: #7b1fa2; /* 紫色导航栏背景 */
-            color: white;
-            padding: 1em;
-            display: flex;
-            justify-content: space-around;
-        }
-
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            padding: 0.5em 1em;
-            transition: background-color 0.3s;
-        }
-
-        .navbar a:hover, .navbar a.active {
-            background-color: #4a148c; /* 深紫色高亮 */
-        }
-
-        /* 内容样式 */
-        .content {
-            padding: 2em;
-        }
-
         h1 {
             color: #4a148c; /* 深紫色标题 */
         }
+        
+        .self-introduction {
+            display: flex;
+            align-items: flex-start; /* 顶部对齐 */
+            margin-bottom: 2em;
+        }
+        .self-introduction-text {
+            flex-basis: 60%;
+            padding-right: 1em;
+        }
+        .self-introduction img {
+            padding-left: 2em;
+            width: 200px; /* 根据需要调整图片宽度 */
+            height: auto; /* 保持图片比例 */
+        }
     </style>
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
 
@@ -52,6 +44,7 @@
         <a href="research.html" class="nav-link" onclick="setActive(this)">Research</a>
         <a href="publications.html" class="nav-link" onclick="setActive(this)">Publications</a>
         <a href="blogs.html" class="nav-link" onclick="setActive(this)">Blogs</a>
+        <a href="recom_readings.html" class="nav-link" onclick="setActive(this)">Recommended Readings</a>
         <a href="visit.html" class="nav-link" onclick="setActive(this)">Visit</a>
         <a href="collaborators.html" class="nav-link" onclick="setActive(this)">Collaborators</a>
     </header>
@@ -59,8 +52,17 @@
     <!-- 主内容 -->
     <!-- Main Content -->
     <div class="content">
-        <h2>自我介绍 / Self Introduction</h2>
-        <p>宋子骏，大连理工大学2021级本科生，目前在中科院软件研究所实习。请通过邮箱联系我：2949203143@mail.dlut.edu.cn。</p>
+        <div class="self-introduction">
+            <div class="self-introduction-text">
+                <h2>自我介绍 / Self Introduction</h2>
+                <p>宋子骏，大连理工大学2021级本科生，现已直博中国科学院大学前沿交叉科学学院。
+                    目前在中国科学院软件研究所天机综合信息系统重点实验室实习，从事强化学习领域相关工作。
+                    如果你希望在强化学习等领域与我合作，请通过邮箱联系我：2949203143@mail.dlut.edu.cn。</p>
+            </div>
+            <div>
+                <img src="Pics/ZijunSong.jpg" alt="ZijunSong" />
+            </div>
+        </div>
 
         <h2>教育及工作经历 / Personal and Work Experience</h2>
         
@@ -73,24 +75,30 @@
         
         <h3>工作经历 / Work Experience</h3>
         <ul>
-            <li>2024.07-至今 清华大学NLP实验室刘知远老师组 科研实习</li>
+            <p>暂无</p>
+            <!-- <li>2024.07-至今 清华大学NLP实验室刘知远老师组 科研实习</li> -->
         </ul>
 
         <h2>研究方向 / Research Interests</h2>
         <ul>
-            <li><b>AI4Bio</b>
-            <li><b>LLM-enhanced RL</b>
+            <li><b>AI4Bio：</b>神经科学基础与脑机接口，扰动建模等。
+            <li><b>LLM-enhanced RL：</b>离线强化学习，多智能体强化学习，群体智能等。
         </ul>
 
-        <h2>研究项目 / Research Projects</h2>
-        <p>暂无</p>
-
         <h2>所获荣誉 / Honors</h2>
-        <p>暂无</p>
+        <ul>
+            <li>2021-2022学年 文体活动奖学金、校优秀团员
+            <li>2022-2023学年 国家励志奖学金、文体活动奖学金、社会工作奖学金、精神文明奖学金、校优秀三好学生
+            <li>2023-2024学年 国家励志奖学金、文体活动奖学金、社会实践奖学金、精神文明奖学金、校优秀三好学生
+        </ul>
 
         <h2>学术兼职 / Part-time Academic Job</h2>
-        <p>暂无</p>
+        <ul>
+            <p>暂无</p>
+        </ul>
         
+        <img src="https://shields.io/badge/dynamic/json?color=blue&label=visitors&query=value&url=https://api.countapi.xyz/hit/zijunsong.github.io/visits" alt="Visitor Count">
+
         <div class="clear"></div>
     </div>
 

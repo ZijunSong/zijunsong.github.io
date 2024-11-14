@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Personal Homepage</title>
+    <title>学术成果</title>
     <style>
         /* 基本样式 */
         body {
@@ -16,11 +16,17 @@
 
         /* 导航栏样式 */
         .navbar {
-            background-color: #7b1fa2; /* 紫色导航栏背景 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%; /* 占满页面宽度 */
+            background-color: #7b1fa2; /* 导航栏背景颜色 */
             color: white;
             padding: 1em;
             display: flex;
             justify-content: space-around;
+            z-index: 1000; /* 确保导航栏在其他内容之上 */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
         }
 
         .navbar a {
@@ -43,6 +49,8 @@
             color: #4a148c; /* 深紫色标题 */
         }
     </style>
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
 
@@ -52,8 +60,9 @@
         <a href="research.html" class="nav-link" onclick="setActive(this)">Research</a>
         <a href="publications.html" class="nav-link" onclick="setActive(this)">Publications</a>
         <a href="blogs.html" class="nav-link" onclick="setActive(this)">Blogs</a>
+        <a href="recom_readings.html" class="nav-link" onclick="setActive(this)">Recommended Readings</a>
         <a href="visit.html" class="nav-link" onclick="setActive(this)">Visit</a>
-        <a href="collaborators.html" class="nav-link" onclick="setActive(this)">Collaborators</a>
+        <a href="collaborators.html" class="nav-link" onclick="setActive(this)">Collaboratorss</a>
     </header>
 
     <!-- 主内容 -->
