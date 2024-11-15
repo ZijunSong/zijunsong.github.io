@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Personal Homepage</title>
+    <title>访学</title>
     <style>
         /* 基本样式 */
         body {
@@ -19,14 +19,14 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%; /* 占满页面宽度 */
-            background-color: #7b1fa2; /* 导航栏背景颜色 */
+            width: 100%;
+            background-color: #7b1fa2;
             color: white;
             padding: 1em;
             display: flex;
             justify-content: space-around;
-            z-index: 1000; /* 确保导航栏在其他内容之上 */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
         .navbar a {
@@ -37,20 +37,72 @@
         }
 
         .navbar a:hover, .navbar a.active {
-            background-color: #4a148c; /* 深紫色高亮 */
+            background-color: #4a148c;
         }
 
         /* 内容样式 */
         .content {
             padding: 2em;
+            padding-top: 5em; /* 确保内容不被固定导航栏遮挡 */
         }
 
         h1 {
-            color: #4a148c; /* 深紫色标题 */
+            color: #4a148c;
         }
-    </style>
-    <link rel="stylesheet" href="style.css">
 
+        /* 时间轴样式 */
+        .timeline-container {
+            position: relative;
+            padding: 2em;
+            margin-top: 2em;
+        }
+
+        /* 时间轴线 */
+        .timeline {
+            position: absolute;
+            left: 5%;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background-color: #4a148c;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            width: 100%; /* 占据整个容器宽度 */
+            margin-bottom: 2em;
+            padding-left: 10%; /* 给时间轴留出空间 */
+        }
+
+        .timeline-date {
+            width: 10%; /* 时间的位置 */
+            text-align: right;
+            padding-right: 1em;
+            font-weight: bold;
+            color: #4a148c;
+        }
+
+        .timeline-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 1em;
+        }
+
+        .timeline-content img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .timeline-content p {
+            flex: 1;
+            margin: 0;
+        }
+
+    </style>
 </head>
 <body>
 
@@ -65,22 +117,98 @@
         <a href="collaborators.html" class="nav-link" onclick="setActive(this)">Collaborators</a>
     </header>
 
-    <!-- 主内容 -->
     <!-- Main Content -->
     <div class="content">
-        <p>Working</p>
+
+        <!-- 时间轴容器 -->
+        <div class="timeline-container">
+            <div class="timeline"></div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2024.10</div>
+                <div class="timeline-content">
+                    <img src="Pics/Visit/rlchina2024.jpg" alt="2023-07HIT">
+                    <p>前往广东广州，参观香港科技大学（广州），参加RLChina2024论坛。</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2024.08</div>
+                <div class="timeline-content">
+                    <img src="Pics/Visit/bigdata.jpg" alt="2023-07HIT">
+                    <p>前往大连市凯宾斯基酒店，参加BigData2024学术会议。</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">2024.07</div>
+                <div class="timeline-content">
+                    <img src="Pics/Visit/SCU.jpg" alt="2023-07HIT">
+                    <p>前往四川成都，参加四川大学计算机学院夏令营。</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">2023.12</div>
+                <div class="timeline-content">
+                    <img src="Pics/Visit/yokohama.jpg" alt="2023-07HIT">
+                    <p>前往日本神奈川县横滨市，参观访学横滨国立大学。</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">2023.09</div>
+                <div class="timeline-content">
+                    <img src="Pics/Visit/Xinao.jpg" alt="2023-07HIT">
+                    <p>前往河北廊坊，参加新奥集团2024年夏令营。</p>
+                </div>
+            </div>
+        
+            <div class="timeline-item">
+                <div class="timeline-date">2023.07</div>
+                <div class="timeline-content">
+                    <img src="Pics/Visit/2023-07HIT.jpg" alt="2023-07HIT">
+                    <p>前往黑龙江哈尔滨，参加哈尔滨工业大学2023年医学与健康学院暑期夏令营，结识了王诗琪老师等人。</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2023.05</div>
+                <div class="timeline-content">
+                    <img src="Pics/Visit/Ximenzi.jpg" alt="2023-07HIT">
+                    <p>前往大连市大连亿峰捌号酒店，参加西门子TIA嘉年华大连站。</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2023.04</div>
+                <div class="timeline-content">
+                    <img src="Pics/Visit/TJU.jpg" alt="Event Image">
+                    <p>前往天津市，参观天津大学，与孙嘉彤老师和张鹏老师会晤。</p>
+                </div>
+            </div>
+        
+            <div class="timeline-item">
+                <div class="timeline-date">2023.04</div>
+                <div class="timeline-content">
+                    <img src="Pics/Visit/Ruanjianyuan.jpg" alt="Event Image">
+                    <p>前往大连市大连软件园，参观罗克韦尔自动化等企业。</p>
+                </div>
+            </div>
+        
+            <!-- 可以继续添加更多的 timeline-item -->
+        </div>
+        
     </div>
 
     <script>
         // 设置导航栏高亮效果
         function setActive(link) {
-            // 移除所有导航项的 active 类
             const links = document.querySelectorAll('.navbar a');
             links.forEach(item => item.classList.remove('active'));
-
-            // 为点击的链接添加 active 类
             link.classList.add('active');
         }
     </script>
 
 </body>
+</html>
