@@ -1,0 +1,24 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>看懂扰动预测：从拟合表达，到检验泛化 · Zijun Song</title><meta name="description" content="为什么在已知条件下预测准确，还不足以证明模型能处理新药物、新细胞类型？一份从评测问题出发的阅读笔记。"><meta name="theme-color" content="#f8f7f4"><meta property="og:title" content="看懂扰动预测：从拟合表达，到检验泛化 · Zijun Song"><meta property="og:description" content="为什么在已知条件下预测准确，还不足以证明模型能处理新药物、新细胞类型？一份从评测问题出发的阅读笔记。"><meta property="og:type" content="article"><link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="alternate" type="application/rss+xml" title="Zijun Song · Research Notes" href="../feed.xml"><link rel="stylesheet" href="../assets/style.css"><script src="../assets/app.js" defer></script></head><body><a class="skip" href="#main">跳到正文</a><div class="reading-progress" aria-hidden="true"></div><header class="site-header"><a class="brand" href="../"><span class="monogram">zs<span>·</span></span><span>Zijun Song <span class="brand-sub">/ Research Notes</span></span></a><nav aria-label="主导航"><a href="../" aria-current="page">研究笔记</a><a href="../projects.html" >项目</a><a href="../about.html" >关于我</a><a class="github-nav" href="https://github.com/ZijunSong" target="_blank" rel="noopener noreferrer">GitHub ↗</a><button class="theme-switch" aria-label="切换深色模式" title="切换深色模式">◐</button></nav></header><main id="main" class="article-main"><a class="back-link" href="../#notes">← 返回研究笔记</a><header class="article-header"><div class="eyebrow">RESEARCH NOTES / AI4Science</div><h1>看懂扰动预测：从拟合表达，到检验泛化</h1><p class="article-deck">为什么在已知条件下预测准确，还不足以证明模型能处理新药物、新细胞类型？一份从评测问题出发的阅读笔记。</p><div class="author-line"><span class="author-mark">ZS</span><span>宋子骏 · Zijun Song<br><small>2026-11-03 · 4 分钟阅读 · v0.1 示例稿</small></span></div></header><div class="article-layout"><article class="prose"><div class="article-notice"><strong>关于这篇示例</strong><p>此文用于展示博客的阅读体验，是依据研究主题撰写的概念性示例，尚未经作者审阅，不代表正式研究报告或实验结论。</p></div><h2 id="section-1">模型究竟在预测什么</h2>
+<p>细胞受到药物或其他干预后，基因表达会发生变化。扰动响应预测尝试用模型估计这些变化，从而辅助理解细胞对干预的反应。 但“预测得准”需要一个明确前提：模型是在已经见过的条件下预测，还是在应对真正的新条件？</p>
+<h2 id="section-2">已知条件与未见条件</h2>
+<p>如果训练数据已经覆盖同一种细胞和同一种扰动，测试可能主要衡量模型对相近分布的拟合能力。换成未见细胞类型或新药物，问题就变成了泛化。 这不是哪个设置天然更有价值，而是它们回答不同的问题。写研究报告时，应该先交代数据划分，再讨论成绩。</p>
+<ul>
+<li>跨细胞类型：模型能否处理训练时没有见过的细胞类型？</li>
+<li>未见药物：模型能否预测新药物带来的响应？</li>
+<li>跨机制：测试扰动的作用机制是否已在训练数据中出现？</li>
+<li>跨物种：来自一个物种的训练信息，能否帮助预测另一个物种？</li>
+</ul>
+<h2 id="section-3">为什么一个指标不够</h2>
+<p>整体表达的相关性较高，不一定意味着模型准确捕捉到了扰动带来的变化。一个原因是，细胞原有表达模式可能占据很强的信号。 因此，研究中常需要同时检查原始表达、相对对照的变化，以及不同样本或细胞群体之间的分布差异。具体指标怎么选，应由任务与数据决定。</p>
+<blockquote>评测指标应该服务于生物学问题：我们要识别平均变化、个体差异，还是某些关键基因的响应？</blockquote>
+<h2 id="section-4">一套统一接口的意义</h2>
+<p><a href="https://github.com/ZijunSong/PertDiffBench" target="_blank" rel="noopener noreferrer">PertDiffBench ↗</a> 提供了多种模型与扰动预测任务的统一运行接口。公开仓库覆盖已知条件、跨细胞类型、跨物种与未见药物等设置。 统一入口可以减少重复的运行工作，但公平比较还需要进一步核对预处理、可用训练信息与超参数选择规则。共享命令行接口，本身并不保证所有对照已经公平。 以下命令来自公开仓库的接口说明，用于查看可用任务与模型。</p>
+<div class="code-wrap"><div class="code-head"><span>bash</span><button class="copy-code">复制代码</button></div><pre><code>pertdiffbench list-tasks
+pertdiffbench list-models-for-task --task known_condition</code></pre></div>
+<h2 id="section-5">阅读结果前的三个问题</h2>
+<ul>
+<li>测试数据在哪些方面没有参与训练？</li>
+<li>不同模型获得的信息是否一致？</li>
+<li>所报告的指标是否真正反映了研究关心的变化？</li>
+</ul>
+<p>把这些问题讲清楚，比孤立地比较一个分数更有助于理解模型的适用范围。本文是概念说明，具体实现和最新结果以公开仓库为准。</p><div class="citation-box"><span class="eyebrow">引用与分享</span><p id="citation">宋子骏. 看懂扰动预测：从拟合表达，到检验泛化. Research Notes, 2026-11-03. https://zijunsong.github.io/posts/perturbation-evaluation.html</p><button class="copy-citation">复制引用</button><span class="copy-feedback" role="status"></span></div><nav class="article-nav" aria-label="继续阅读"><span>继续阅读</span><a href="harness-to-capability.html">从外部 Harness，到模型自己的能力 ↗</a><a href="search-for-evidence.html">搜索的价值，是找到答案还是减少不确定性？ ↗</a></nav></article><aside class="toc"><span class="eyebrow">ON THIS PAGE</span><a href="#section-1">模型究竟在预测什么</a><a href="#section-2">已知条件与未见条件</a><a href="#section-3">为什么一个指标不够</a><a href="#section-4">一套统一接口的意义</a><a href="#section-5">阅读结果前的三个问题</a><a class="back-top" href="#main">回到顶部 ↑</a></aside></div></main><footer class="site-footer"><div><a class="footer-name" href="../">Zijun Song<span> / 紫色噩梦</span></a><p>把想法写清楚，把实验做扎实。</p></div><div class="footer-right"><a href="../feed.xml">RSS ↗</a><a href="mailto:2949203143@qq.com">Email ↗</a><span>© 2026 · An open research notebook.</span></div></footer></body></html>

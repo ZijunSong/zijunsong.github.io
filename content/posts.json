@@ -1,0 +1,39 @@
+[
+  {
+    "slug": "harness-to-capability",
+    "title": "从外部 Harness，到模型自己的能力",
+    "summary": "当一个 Agent 借助工具、记忆与流程表现更好时，哪些能力可以留在模型里？从一个具体问题，理解能力内化的研究动机。",
+    "tags": [
+      "Agent",
+      "后训练"
+    ],
+    "kind": "METHOD NOTES",
+    "date": "2026-11-03",
+    "minutes": 5,
+    "example": true
+  },
+  {
+    "slug": "search-for-evidence",
+    "title": "搜索的价值，是找到答案还是减少不确定性？",
+    "summary": "把“再搜一次”拆成可检验的决策：缺少什么证据、这次搜索改变了什么，以及什么时候应该停下来。",
+    "tags": [
+      "Agent"
+    ],
+    "kind": "OPEN QUESTIONS",
+    "date": "2026-11-03",
+    "minutes": 4,
+    "example": true
+  },
+  {
+    "slug": "perturbation-evaluation",
+    "title": "看懂扰动预测：从拟合表达，到检验泛化",
+    "summary": "为什么在已知条件下预测准确，还不足以证明模型能处理新药物、新细胞类型？一份从评测问题出发的阅读笔记。",
+    "tags": [
+      "AI4Science"
+    ],
+    "kind": "RESEARCH NOTES",
+    "date": "2026-11-03",
+    "minutes": 4,
+    "example": true
+  }
+]
