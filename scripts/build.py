@@ -153,10 +153,10 @@ def shell(title, body, active='home', desc='Zijun Song’s homepage: search-agen
     )
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{E(title)} · Zijun Song</title><meta name="description" content="{E(desc)}"><meta name="theme-color" content="#f8f7f4"><meta property="og:title" content="{E(title)} · Zijun Song"><meta property="og:description" content="{E(desc)}"><meta property="og:type" content="{'article' if path.startswith('posts/') else 'website'}"><link rel="icon" href="{depth}assets/favicon.svg" type="image/svg+xml"><link rel="alternate" type="application/rss+xml" title="Zijun Song · Blog" href="{depth}feed.xml"><link rel="stylesheet" href="{depth}assets/style.css"><script src="{depth}assets/app.js" defer></script></head><body><a class="skip" href="#main">Skip to content</a><div class="reading-progress" aria-hidden="true"></div><header class="site-header"><a class="brand" href="{depth}"><span class="monogram">zs<span>·</span></span><span>Zijun Song</span></a><nav aria-label="Primary">{nav}<a class="github-nav" href="https://github.com/ZijunSong" target="_blank" rel="noopener noreferrer">GitHub ↗</a><button class="theme-switch" aria-label="Switch to dark mode" title="Switch theme">◐</button></nav></header>{body}<footer class="site-footer"><div><a class="footer-name" href="{depth}">Zijun Song<span> / Purple Nightmare</span></a><p>Write ideas clearly. Test them carefully.</p></div><div class="footer-right"><a href="{depth}feed.xml">RSS ↗</a><a href="mailto:2949203143@qq.com">Email ↗</a><a href="{SCHOLAR}" target="_blank" rel="noopener noreferrer">Scholar ↗</a><span>© 2026 · An open research notebook.</span></div></footer></body></html>'''
 
-def card(p, featured=False, prefix='posts/'):
+def card(p, featured=True, prefix='posts/', index=1):
     tags = ''.join('<span>' + E(t) + '</span>' for t in p['tags'])
     return (
-        f'<a class="note-card {"featured-card" if featured else ""}" href="{prefix}{E(p["slug"])}.html" '
+        f'<a class="note-card {"featured-card" if featured else ""}" style="--card-n:\'{index:02d}\'" href="{prefix}{E(p["slug"])}.html" '
         f'data-tags="{E(" ".join(p["tags"]))}" data-search="{E(p["title"] + " " + p["summary"] + " " + " ".join(p["tags"]))}">'
         f'<div class="note-meta"><span>{E(p["kind"])}</span><span>{p["date"].replace("-", ".")} · {p["minutes"]} MIN READ</span></div>'
         f'<h3>{E(p["title"])}<span class="card-arrow">↗</span></h3><p>{E(p["summary"])}</p>'
@@ -210,7 +210,7 @@ home = f'''<main id="main" class="home-main">
 </section>
 <section class="home-section notes-section" id="blog">
   <div class="section-heading"><div><div class="home-kicker">BLOG</div><h2>Selected posts</h2></div><a class="text-link" href="blog.html">All posts ↗</a></div>
-  <div class="notes-grid home-notes">{''.join(card(p, i==0) for i,p in enumerate(BLOG_POSTS))}</div>
+  <div class="notes-grid home-notes">{''.join(card(p, index=i) for i,p in enumerate(BLOG_POSTS, 1))}</div>
 </section>
 <section class="home-section" id="publications">
   <div class="section-heading"><div><div class="home-kicker">PUBLICATIONS</div><h2>Papers</h2></div><a class="text-link" href="{SCHOLAR}" target="_blank" rel="noopener noreferrer">Google Scholar ↗</a></div>
@@ -231,7 +231,7 @@ home = f'''<main id="main" class="home-main">
 <section class="closing-note"><span class="handwritten">A work in progress.</span><p>Research is more than papers.<br>Some of the process belongs here too.</p><a href="mailto:2949203143@qq.com">Get in touch <span>↗</span></a></section>
 </main>'''
 
-blog_body = f'''<main id="main"><section class="notes-section page-notes" id="blog"><div class="section-heading"><div><div class="eyebrow">BLOG</div><h2>Posts<span class="section-count"> / {str(len(BLOG_POSTS)).zfill(2)}</span></h2></div><p>Method notes from ongoing research.</p></div><div class="notes-tools"><div class="filters" role="group" aria-label="Filter by topic">{''.join(f'<button data-filter="{t}" aria-pressed="{str(t=="All").lower()}">{t}</button>' for t in ['All','Agent','Post-training'])}</div><label class="search-box"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8" cy="8" r="5.5"/><path d="m12 12 5 5"/></svg><input id="search" type="search" placeholder="Search posts…" aria-label="Search posts"><kbd>/</kbd></label></div><div class="notes-grid">{''.join(card(p, i==0) for i,p in enumerate(BLOG_POSTS))}</div><p class="no-results" hidden>No matching posts. Try another keyword or topic.</p></section></main>'''
+blog_body = f'''<main id="main"><section class="notes-section page-notes" id="blog"><div class="section-heading"><div><div class="eyebrow">BLOG</div><h2>Posts<span class="section-count"> / {str(len(BLOG_POSTS)).zfill(2)}</span></h2></div><p>Method notes from ongoing research.</p></div><div class="notes-tools"><div class="filters" role="group" aria-label="Filter by topic">{''.join(f'<button data-filter="{t}" aria-pressed="{str(t=="All").lower()}">{t}</button>' for t in ['All','Agent','Post-training'])}</div><label class="search-box"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8" cy="8" r="5.5"/><path d="m12 12 5 5"/></svg><input id="search" type="search" placeholder="Search posts…" aria-label="Search posts"><kbd>/</kbd></label></div><div class="notes-grid">{''.join(card(p, index=i) for i,p in enumerate(BLOG_POSTS, 1))}</div><p class="no-results" hidden>No matching posts. Try another keyword or topic.</p></section></main>'''
 
 (OUT / 'index.html').write_text(shell('About', home, 'home'), encoding='utf-8')
 (OUT / 'blog.html').write_text(shell('Blog', blog_body, 'blog', 'Research notes by Zijun Song on agents, post-training, and tool learning.'), encoding='utf-8')
