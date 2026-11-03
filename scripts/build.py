@@ -213,7 +213,6 @@ home = f'''<main id="main" class="home-main">
 </section>
 <section class="home-section" id="publications">
   <div class="section-heading"><div><div class="home-kicker">PUBLICATIONS</div><h2>Papers</h2></div><a class="text-link" href="{SCHOLAR}" target="_blank" rel="noopener noreferrer">Google Scholar ↗</a></div>
-  <p class="home-lead">Author lists follow the original papers. <span class="pub-me">Zijun Song</span> is me. Accepted first-author work is listed first, then accepted co-authored papers, then other manuscripts.</p>
   <h3 class="pub-group">Research Papers</h3>
   <div class="pub-list">{''.join(pub_item(p) for p in RESEARCH_PAPERS)}</div>
   <h3 class="pub-group">Technical Reports</h3>
