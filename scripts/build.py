@@ -87,6 +87,7 @@ def inline(s):
     s = E(s)
     s = re.sub(r'`([^`]+)`', r'<code>\1</code>', s)
     s = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', s)
+    s = re.sub(r'(?<!\*)\*([^*]+)\*(?!\*)', r'<em>\1</em>', s)
     s = re.sub(r'\[([^\]]+)\]\((https?://[^\s)]+)\)', r'<a href="\2" target="_blank" rel="noopener noreferrer">\1 ↗</a>', s)
     return s
 
@@ -117,6 +118,15 @@ def markdown(text):
         if listing and not line.startswith('- '):
             out.append('</ul>')
             listing = False
+        img = re.match(r'!\[([^\]]*)\]\(([^)]+)\)', line.strip())
+        if img:
+            flush()
+            alt, src = img.group(1), img.group(2)
+            out.append(f'<figure><img src="{E(src)}" alt="{E(alt)}" loading="lazy"><figcaption>{inline(alt)}</figcaption></figure>')
+            continue
+        if line.startswith('# '):
+            flush()
+            continue
         if line.startswith('## '):
             flush()
             label = line[3:]
