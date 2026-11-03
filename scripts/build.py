@@ -142,7 +142,7 @@ def markdown(text):
     return '\n'.join(out), toc
 
 def mark_me(authors):
-    return re.sub(r'(Zijun Song|宋子骏)', r'<span class="pub-me">\1</span>', E(authors))
+    return re.sub(r'(Zijun Song)', r'<span class="pub-me">\1</span>', E(authors))
 
 def shell(title, body, active='home', desc='Zijun Song’s homepage: search-agent post-training and research notes.', path=''):
     depth = '../' if path.startswith('posts/') else './'
@@ -151,7 +151,7 @@ def shell(title, body, active='home', desc='Zijun Song’s homepage: search-agen
         f'<a href="{depth}{p}"' + (' aria-current="page"' if active == key else '') + f'>{label}</a>'
         for key, p, label in items
     )
-    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{E(title)} · Zijun Song</title><meta name="description" content="{E(desc)}"><meta name="theme-color" content="#f8f7f4"><meta property="og:title" content="{E(title)} · Zijun Song"><meta property="og:description" content="{E(desc)}"><meta property="og:type" content="{'article' if path.startswith('posts/') else 'website'}"><link rel="icon" href="{depth}assets/favicon.svg" type="image/svg+xml"><link rel="alternate" type="application/rss+xml" title="Zijun Song · Blog" href="{depth}feed.xml"><link rel="stylesheet" href="{depth}assets/style.css"><script src="{depth}assets/app.js" defer></script></head><body><a class="skip" href="#main">Skip to content</a><div class="reading-progress" aria-hidden="true"></div><header class="site-header"><a class="brand" href="{depth}"><span class="monogram">zs<span>·</span></span><span>Zijun Song <span class="brand-sub">/ 宋子骏</span></span></a><nav aria-label="Primary">{nav}<a class="github-nav" href="https://github.com/ZijunSong" target="_blank" rel="noopener noreferrer">GitHub ↗</a><button class="theme-switch" aria-label="Switch to dark mode" title="Switch theme">◐</button></nav></header>{body}<footer class="site-footer"><div><a class="footer-name" href="{depth}">Zijun Song<span> / Purple Nightmare</span></a><p>Write ideas clearly. Test them carefully.</p></div><div class="footer-right"><a href="{depth}feed.xml">RSS ↗</a><a href="mailto:2949203143@qq.com">Email ↗</a><a href="{SCHOLAR}" target="_blank" rel="noopener noreferrer">Scholar ↗</a><span>© 2026 · An open research notebook.</span></div></footer></body></html>'''
+    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{E(title)} · Zijun Song</title><meta name="description" content="{E(desc)}"><meta name="theme-color" content="#f8f7f4"><meta property="og:title" content="{E(title)} · Zijun Song"><meta property="og:description" content="{E(desc)}"><meta property="og:type" content="{'article' if path.startswith('posts/') else 'website'}"><link rel="icon" href="{depth}assets/favicon.svg" type="image/svg+xml"><link rel="alternate" type="application/rss+xml" title="Zijun Song · Blog" href="{depth}feed.xml"><link rel="stylesheet" href="{depth}assets/style.css"><script src="{depth}assets/app.js" defer></script></head><body><a class="skip" href="#main">Skip to content</a><div class="reading-progress" aria-hidden="true"></div><header class="site-header"><a class="brand" href="{depth}"><span class="monogram">zs<span>·</span></span><span>Zijun Song</span></a><nav aria-label="Primary">{nav}<a class="github-nav" href="https://github.com/ZijunSong" target="_blank" rel="noopener noreferrer">GitHub ↗</a><button class="theme-switch" aria-label="Switch to dark mode" title="Switch theme">◐</button></nav></header>{body}<footer class="site-footer"><div><a class="footer-name" href="{depth}">Zijun Song<span> / Purple Nightmare</span></a><p>Write ideas clearly. Test them carefully.</p></div><div class="footer-right"><a href="{depth}feed.xml">RSS ↗</a><a href="mailto:2949203143@qq.com">Email ↗</a><a href="{SCHOLAR}" target="_blank" rel="noopener noreferrer">Scholar ↗</a><span>© 2026 · An open research notebook.</span></div></footer></body></html>'''
 
 def card(p, featured=False, prefix='posts/'):
     tags = ''.join('<span>' + E(t) + '</span>' for t in p['tags'])
@@ -177,7 +177,7 @@ home = f'''<main id="main" class="home-main">
   <img class="profile-photo" src="Pics/ZijunSong.jpg" alt="Portrait of Zijun Song" width="200" height="240">
   <div>
     <div class="eyebrow"><span class="tiny-dot"></span> ABOUT</div>
-    <h1>Zijun Song<span class="profile-en">宋子骏</span></h1>
+    <h1>Zijun Song</h1>
     <p class="profile-role">PhD student · School of Advanced Interdisciplinary Sciences, UCAS<br>Jointly trained with the Institute of Automation, CAS · Beijing</p>
     <div class="profile-links">
       <a href="mailto:2949203143@qq.com">Email</a>
@@ -188,7 +188,7 @@ home = f'''<main id="main" class="home-main">
     <div class="profile-bio">
       <p>I am Zijun Song. I received my B.Eng. in Network Engineering from the School of Software, Dalian University of Technology, in 2025. As an undergraduate, I worked on wireless sensing with Wi-Fi, UWB, and millimeter-wave radar.</p>
       <p>I am now a PhD student at the School of Advanced Interdisciplinary Sciences, University of the Chinese Academy of Sciences, jointly trained with the <a href="https://www.ia.ac.cn/" target="_blank" rel="noopener noreferrer">Institute of Automation, CAS</a>. I am advised by <a href="https://scholar.google.com/citations?user=RxvYlNQAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Prof. Dongbin Zhao</a>.</p>
-      <p>My current research focuses on <strong>post-training for search agents</strong>. At ModelBest (面壁智能), I worked on post-training for MiniCPM4 and AgentCPM-Explore. At Xiaomi, I worked on post-training for MiSearchAgent.</p>
+      <p>My current research focuses on <strong>post-training for search agents</strong>. At ModelBest, I worked on post-training for MiniCPM4 and AgentCPM-Explore. At Xiaomi, I work on post-training for MiSearchAgent.</p>
     </div>
     <div class="hero-topics"><span>SEARCH AGENT</span><i></i><span>POST-TRAINING</span><i></i><span>WIRELESS SENSING</span></div>
   </div>
@@ -197,8 +197,15 @@ home = f'''<main id="main" class="home-main">
   <div class="home-kicker">EXPERIENCE</div>
   <h2>Internships</h2>
   <div class="timeline">
-    <div class="timeline-item"><span class="when">TBD</span><div><h3>Research Intern, ModelBest (面壁智能)</h3><p>Post-training for MiniCPM4 and AgentCPM-Explore.</p></div></div>
-    <div class="timeline-item"><span class="when">TBD</span><div><h3>Research Intern, Xiaomi</h3><p>Post-training for MiSearchAgent.</p></div></div>
+    <div class="timeline-item"><span class="when">2024.07 – 2025.10</span><div>
+      <h3>Research Intern, LLM Agent / Tool Learning, ModelBest</h3>
+      <p>I worked on on-device LLM tool learning and agent post-training, contributing to MiniCPM4 and AgentCPM-Explore. I led or contributed to multi-turn MCP tool-calling data synthesis, SFT and AgentRL training, and the AgentToLeaP evaluation platform, improving tool selection, argument generation, multi-turn interaction, and long-horizon exploration.</p>
+      <p>I contributed to MiniCPM4 MCP tool-calling post-training and to the development and core evaluation of AgentCPM-Explore, supporting a 4B on-device agent that reached leading results on complex tool use and long-horizon exploration. Related publications include ToLeaP, Reflective Reinforcement Tool Learning, and the MiniCPM4 and AgentCPM-Explore technical reports.</p>
+    </div></div>
+    <div class="timeline-item"><span class="when">2026.07 – Present</span><div>
+      <h3>Search Agent Post-training Intern, Xiaomi</h3>
+      <p>I work on post-training for search agents. On the product side, I contribute to post-training of the MiSearchAgent models, reducing latency without hurting performance. On the research side, I study how to internalize agent-system capabilities into the model and proposed HarnessOPD, which transfers capabilities from the harness into the model parameters.</p>
+    </div></div>
   </div>
 </section>
 <section class="home-section notes-section" id="blog">
@@ -260,10 +267,13 @@ project_body = '''<main id="main" class="page-main"><div class="eyebrow">SELECTE
 pages = ['', 'blog.html', 'projects.html'] + ['posts/' + p['slug'] + '.html' for p in BLOG_POSTS]
 (OUT / 'sitemap.xml').write_text('<?xml version="1.0" encoding="utf-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + ''.join('<url><loc>' + BASE + '/' + p + '</loc></url>' for p in pages) + '</urlset>', encoding='utf-8')
 (OUT / 'robots.txt').write_text('User-agent: *\nAllow: /\nSitemap: ' + BASE + '/sitemap.xml\n', encoding='utf-8')
-for name in ('Papers', 'Pics'):
+for name in ('Pics',):
     src, dst = ROOT / name, OUT / name
     if src.exists():
         if dst.exists():
             shutil.rmtree(dst)
         shutil.copytree(src, dst)
+legacy_zh = OUT / 'Papers'
+if legacy_zh.exists():
+    shutil.rmtree(legacy_zh)
 print('Built homepage, notes, projects, RSS, sitemap. Assets retained.')
