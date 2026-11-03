@@ -186,11 +186,11 @@ home = f'''<main id="main" class="home-main">
       <a href="blog.html">Blog</a>
     </div>
     <div class="profile-bio">
-      <p>I am Zijun Song. I received my B.Eng. in Network Engineering from the School of Software, Dalian University of Technology, in 2025. As an undergraduate, I worked on wireless sensing with Wi-Fi, UWB, and millimeter-wave radar.</p>
-      <p>I am now a PhD student at the School of Advanced Interdisciplinary Sciences, University of the Chinese Academy of Sciences, jointly trained with the <a href="https://www.ia.ac.cn/" target="_blank" rel="noopener noreferrer">Institute of Automation, CAS</a>. I am advised by <a href="https://scholar.google.com/citations?user=RxvYlNQAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Prof. Dongbin Zhao</a>.</p>
-      <p>My current research focuses on <strong>post-training for search agents</strong>. At ModelBest, I worked on post-training for MiniCPM4 and AgentCPM-Explore. At Xiaomi, I work on post-training for MiSearchAgent.</p>
+      <p>I am Zijun Song, a Ph.D. student at the School of Advanced Interdisciplinary Sciences, University of the Chinese Academy of Sciences, in a joint training program with the <a href="https://www.ia.ac.cn/" target="_blank" rel="noopener noreferrer">Institute of Automation, Chinese Academy of Sciences</a>. I am advised by <a href="https://scholar.google.com/citations?user=RxvYlNQAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Prof. Dongbin Zhao</a>.</p>
+      <p>My research focuses on <strong>post-training for search agents</strong>. At ModelBest, I contributed to the post-training of MiniCPM4 and AgentCPM-Explore. I currently work on post-training for MiSearchAgent at Xiaomi.</p>
+      <p>I received my B.Eng. in Network Engineering from the School of Software, Dalian University of Technology, in 2025. During my undergraduate studies, I conducted research on wireless sensing using Wi-Fi, ultra-wideband (UWB), and millimeter-wave radar.</p>
     </div>
-    <div class="hero-topics"><span>SEARCH AGENT</span><i></i><span>POST-TRAINING</span><i></i><span>WIRELESS SENSING</span></div>
+    <div class="hero-topics"><span>LLM</span><i></i><span>SEARCH AGENT</span><i></i><span>POST-TRAINING</span></div>
   </div>
 </section>
 <section class="home-section" id="experience">
