@@ -220,14 +220,6 @@ home = f'''<main id="main" class="home-main">
   <h3 class="pub-group">Technical Reports</h3>
   <div class="pub-list">{''.join(pub_item(p) for p in TECH_REPORTS)}</div>
 </section>
-<section class="projects-preview" id="open-source">
-  <div class="section-heading"><div><div class="home-kicker">OPEN SOURCE</div><h2>From papers to code</h2></div><a class="text-link" href="projects.html">All projects ↗</a></div>
-  <div class="project-strip">
-    <a href="https://github.com/ZijunSong/PertDiffBench" target="_blank" rel="noopener noreferrer"><span class="project-number">01</span><div><h3>PertDiffBench ↗</h3><p>A unified benchmark for perturbation response prediction.</p></div><span class="project-type">AI4SCIENCE</span></a>
-    <a href="https://github.com/ZijunSong/Capability_Evolution" target="_blank" rel="noopener noreferrer"><span class="project-number">02</span><div><h3>Capability Evolution ↗</h3><p>Agent capability, self-evolution, and training.</p></div><span class="project-type">AGENTS</span></a>
-    <a href="https://github.com/ZijunSong/On-Policy-Context-Distillation" target="_blank" rel="noopener noreferrer"><span class="project-number">03</span><div><h3>On-Policy Context Distillation ↗</h3><p>An open implementation of on-policy distillation.</p></div><span class="project-type">POST-TRAINING</span></a>
-  </div>
-</section>
 <section class="closing-note"><span class="handwritten">A work in progress.</span><p>Research is more than papers.<br>Some of the process belongs here too.</p><a href="mailto:2949203143@qq.com">Get in touch <span>↗</span></a></section>
 </main>'''
 
