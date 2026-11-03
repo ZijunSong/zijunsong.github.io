@@ -1,39 +1,39 @@
-> **投稿记录：EMNLP 被拒。** 下文介绍当前修订稿，不等同于当时的送审版本。更新于 2026 年 11 月 3 日。
+> **Submission record: rejected at EMNLP.** The note below describes the current revision, not the submitted version. Updated November 3, 2026.
 
-## 问题：失败经验，真的值得照单全收吗？
+## The question: should every failure be taken at face value?
 
-模型多次尝试同一道题，会留下有用推导与反复出现的错误。把这些经验放回提示词，可以帮助下一轮推理；但“读到提醒”并不保证模型会遵循提醒。
+When a model retries the same problem, it leaves both useful derivations and recurring mistakes. Putting that experience back into the prompt can help the next attempt, but “seeing a reminder” does not mean the model will follow it.
 
-另一个问题更隐蔽：**一次失败的解答，也可能包含正确策略。** 如果把它整体当成负经验，强行压制相似思路，反而可能阻止模型走向正确答案。RG-CTO 因此关注：如何让经验直接影响生成，同时控制错误负经验的影响？
+A quieter issue is that **a failed solution may still contain a correct strategy.** Treating the whole trace as negative experience and suppressing similar thoughts can block the path to the right answer. RG-CTO therefore asks: how can experience shape generation directly, while limiting the damage of wrong negative experience?
 
-## 方法：正向引导，加上有选择的负向抑制
+## Method: positive guidance, plus selective negative suppression
 
-我们提出的 CTO，让同一个冻结模型在两种条件下评估下一 token：正分支利用有益经验；负分支被引导沿着疑似错误思路继续，从而暴露与失败相关的生成倾向。两条分支始终共享同一个已生成前缀，并只采样一条实际续写。
+CTO lets the same frozen model score the next token under two conditions. The positive branch uses helpful experience. The negative branch is steered along a suspected-wrong line of thought, exposing generation tendencies tied to failure. Both branches share the same generated prefix, and only one continuation is sampled.
 
-![图 1｜RG-CTO：先评估负经验可靠性，再过滤条目并调节对比分支的影响。](../assets/figures/rgcto-method.svg)
+![Figure 1. RG-CTO: estimate the reliability of negative experience, then filter items and scale the contrastive branch.](../assets/figures/rgcto-method.svg)
 
-RG-CTO 在此基础上，先检查每条负经验的三类信号：
+RG-CTO first checks each negative item with three signals:
 
-- **支持度**：此前多条轨迹是否支持这个模式？反复出现只是线索，并不能证明它一定错误。
-- **相关性**：它是否与当前问题及正经验有关？
-- **冲突风险**：压制它，是否可能连带伤害正经验支持的有效推理？
+- **Support:** do earlier traces support this pattern? Recurrence is only a clue; it does not prove the pattern is wrong.
+- **Relevance:** is it related to the current problem and to the positive experience?
+- **Conflict risk:** if we suppress it, might we also hurt valid reasoning supported by positive experience?
 
-低可靠条目被过滤，保留条目的平均可靠性再决定本轮负向作用的强度。没有合适的负经验时，就退回正向指导。**模型参数全程不更新；可靠性按问题、按轮估计，并非每个 token 都重新判定。**
+Low-reliability items are filtered. The mean reliability of the remaining items then sets how strongly the negative branch acts in this round. If no suitable negative experience remains, the method falls back to positive guidance. **Model parameters are never updated. Reliability is estimated per problem and per round, not retuned at every token.**
 
-## 结果：可靠性控制能减少经验误用
+## Results: reliability control reduces misuse of experience
 
-在当前修订稿的 HMMT24 + Qwen3-4B-Thinking 设置中，第三轮指导后的平均 Pass@1 为：RSE **59.7%**、CTO **62.5%**、RG-CTO **66.7%**。相对把经验放进提示词的 RSE，提升为 **7.0 个百分点**。
+On the current revision's HMMT24 + Qwen3-4B-Thinking setup, mean Pass@1 after the third guided round is **59.7%** for RSE, **62.5%** for CTO, and **66.7%** for RG-CTO. Relative to RSE, which puts experience into the prompt, this is a **7.0 point** gain.
 
-![图 2｜HMMT24、Qwen3-4B、Iter3 的方法比较与累加消融，均为三种子的均值。](../assets/figures/rgcto-results.svg)
+![Figure 2. Method comparison and cumulative ablation on HMMT24, Qwen3-4B, Iter3, averaged over three seeds.](../assets/figures/rgcto-results.svg)
 
-主比较每题每轮生成 32 条轨迹，覆盖 Iter0–Iter3。累加消融中，依次加入支持度、相关性、冲突估计和过滤后，成绩从 **62.5%** 提高到 **66.7%**；这些是顺序叠加的收益，不能当成各模块相互独立的贡献。右图纵轴已放大，以便观察差异。
+The main comparison generates 32 traces per problem per round, covering Iter0–Iter3. In the cumulative ablation, adding support, relevance, conflict estimation, and filtering in order raises the score from **62.5%** to **66.7%**. These are sequential gains, not independent module contributions. The right-hand axis is zoomed to make the differences visible.
 
-当前修订稿还扩展到数学、问答、代码生成与规划，共 12 个基准—模型配置；RG-CTO 在这些配置的 Iter3 均取得所比较方法中的最高平均分。这里报告的是均值比较，不自动意味着每项差异都具有统计显著性。
+The revision also extends to math, QA, code generation, and planning, covering 12 benchmark–model settings. RG-CTO attains the highest mean among the compared methods at Iter3 in these settings. Mean comparisons do not automatically imply that every difference is statistically significant.
 
-## 这项工作的启发与边界
+## Implications and limits
 
-经验复用不仅要问“找到了哪些经验”，还要问“这些经验有资格多大程度地影响决策”。负经验尤其需要谨慎赋权。
+Experience reuse should ask not only “which experiences were found,” but also “how much influence those experiences deserve.” Negative experience especially needs careful weighting.
 
-但可靠性估计仍来自模型判断，不是独立的正确性证明；双分支解码也会增加推理计算。因此，这项工作支持的是**更可控的经验利用**，并不等同于免费提升或消除错误经验。
+Reliability estimates still come from the model, not from an independent proof of correctness, and dual-branch decoding adds inference cost. The work therefore supports **more controlled use of experience**, not a free improvement or the removal of bad experience.
 
-*依据 2026-11-02 当前修订稿《Reliability-Gated Contrastive Trajectory Optimization for Test-Time Experience Reuse》整理。EMNLP 拒稿状态由作者提供。相关研究代码见 [RG-CTO](https://github.com/ZijunSong/RG-CTO)。*
+*Based on the 2026-11-02 revision* Reliability-Gated Contrastive Trajectory Optimization for Test-Time Experience Reuse. *EMNLP rejection status provided by the author. Code: [RG-CTO](https://github.com/ZijunSong/RG-CTO).*

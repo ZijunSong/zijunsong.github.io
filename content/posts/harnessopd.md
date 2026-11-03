@@ -1,36 +1,36 @@
-> **投稿状态：WWW 在投（尚未录用）。** 更新于 2026 年 11 月 3 日。
+> **Submission status: under review at WWW (not yet accepted).** Updated November 3, 2026.
 
-## 问题：系统更强，模型也变强了吗？
+## The question: if the system is stronger, is the model stronger too?
 
-一个搜索 Agent 的表现，不只取决于模型。证据核验、上下文管理和多跳关系组织等 Harness 组件，也能帮助它做出更好的决策。但一旦撤掉这些组件，收益可能随之消失。
+A search agent's performance depends on more than the model. Harness components such as evidence checking, context management, and multi-hop organization can also improve decisions. Once those components are removed, the gains may disappear.
 
-**HarnessOPD 关注的是：能否把高级 Harness 带来的行为优势，部分留在模型参数里，让模型部署时只使用简化 Harness？** 这里的“简化”仍保留完成任务所需的基础工具，并不是让模型脱离工具独立工作。
+**HarnessOPD asks whether the behavioral advantage of a stronger harness can be partly kept in the model parameters, so that deployment uses only a simplified harness.** “Simplified” still keeps the basic tools needed to finish the task. The model is not asked to work without tools.
 
-## 方法：向强执行过程学习，而非照搬工具调用
+## Method: learn from a stronger execution process, not from copied tool calls
 
-教师与学生使用相同模型骨干，区别在于可用的 Harness。学生始终在简化 Harness 下采样；教师在学生状态的隔离副本上运行高级组件，提供额外指导。
+Teacher and student share the same model backbone and differ only in the available harness. The student always samples under the simplified harness. The teacher runs advanced components on an isolated copy of the student's state and provides extra guidance.
 
-![图 1｜HarnessOPD：隔离教师执行，经动作对齐后指导学生训练。](../assets/figures/harnessopd-method.svg)
+![Figure 1. HarnessOPD: isolated teacher execution, then action alignment to supervise the student.](../assets/figures/harnessopd-method.svg)
 
-关键难点是：**教师能做的操作，学生未必能执行。** 我们采用两条对齐路径：
+The hard part is that **the teacher can take actions the student cannot execute.** We use two alignment paths:
 
-- **投影（Project）**：能映射的高级组件效果，转换成学生可执行的基础动作。
-- **延后（Defer）**：无法直接映射的操作，由教师私下继续执行，直到得到对保存的学生状态仍然兼容的基础动作。
+- **Project:** when an advanced-component effect can be mapped, convert it into a basic action the student can take.
+- **Defer:** when it cannot be mapped directly, let the teacher continue privately until it produces a basic action that is still valid for the saved student state.
 
-这些分支不会改写学生的真实轨迹。训练将对齐后的 on-policy 蒸馏与结果强化学习结合：前者提供局部决策指导，后者依据整段任务表现反馈。部署时移除教师的高级组件。
+These branches do not rewrite the student's real trajectory. Training combines aligned on-policy distillation with outcome reinforcement learning: the former gives local decision guidance, the latter gives feedback from whole-task performance. At deployment, the teacher's advanced components are removed.
 
-## 结果：简化部署下，召回更高、交互更少
+## Results: higher recall and fewer interactions under simplified deployment
 
-在 **GPT-OSS-20B + Harness-1** 设置中，经过 200 次训练更新，HarnessOPD 的四项基准宏平均召回率达到 **67.37%**，高于初始简化系统的 **62.54%**，也超过初始完整 Harness 参照的 **66.40%**；平均交互轮数由初始学生的 **20.91** 降至 **19.96**。
+Under **GPT-OSS-20B + Harness-1**, after 200 training updates, HarnessOPD reaches a four-benchmark macro-average recall of **67.37%**, above the initial simplified system (**62.54%**) and the initial full-harness reference (**66.40%**). Average interaction turns drop from **20.91** for the initial student to **19.96**.
 
-![图 2｜四项基准上的召回率与平均交互轮数，均为三次评测种子的均值。](../assets/figures/harnessopd-results.svg)
+![Figure 2. Recall and average interaction turns on four benchmarks, averaged over three evaluation seeds.](../assets/figures/harnessopd-results.svg)
 
-这里的召回率衡量**最终证据集合保留了多少相关文档**，不是答案字符串准确率；交互轮数也不等同于时延、token 用量或训练成本。四项基准为 BrowseComp+、LongSealQA、FRAMES 与 HotpotQA。
+Recall here measures **how many relevant documents remain in the final evidence set**, not answer-string accuracy. Interaction turns are not the same as latency, token usage, or training cost. The four benchmarks are BrowseComp+, LongSealQA, FRAMES, and HotpotQA.
 
-同为 200 次更新，RL-only 的宏平均召回率为 **64.25%**，说明对齐后的教师指导提供了额外收益。行为分析还观察到：高级组件撤掉后，模型仍能通过基础工具表现出核对证据、组合多跳信息和按证据决定何时停止的行为。
+With the same 200 updates, RL-only reaches **64.25%** macro-average recall, so aligned teacher guidance adds extra gain. Behavior analysis also shows that after the advanced components are removed, the model can still check evidence, combine multi-hop information, and decide when to stop through basic tools.
 
-## 这项工作说明了什么？
+## What this work does and does not show
 
-高级 Harness 可以成为临时的训练教师，而部分有用决策可以在更简单的部署接口下保留下来。当前证据来自一个模型与 Harness 设置，**并不意味着所有组件都已被完整内化，也不代表任意任务上都能成立**。
+A stronger harness can serve as a temporary teacher, and some useful decisions can remain under a simpler deployment interface. The current evidence comes from one model and one harness setting. **It does not mean every component has been fully internalized, or that the result holds for arbitrary tasks.**
 
-*依据 2026-10-25 版本稿件《HarnessOPD: Internalizing Agent Harness Capabilities via On-Policy Distillation》整理。投稿状态由作者提供。相关研究代码见 [Capability Evolution](https://github.com/ZijunSong/Capability_Evolution)。*
+*Based on the 2026-10-25 manuscript* HarnessOPD: Internalizing Agent Harness Capabilities via On-Policy Distillation. *Submission status provided by the author. Code: [Capability Evolution](https://github.com/ZijunSong/Capability_Evolution).*
