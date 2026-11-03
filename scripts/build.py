@@ -144,7 +144,7 @@ def markdown(text):
 def mark_me(authors):
     return re.sub(r'(Zijun Song|宋子骏)', r'<span class="pub-me">\1</span>', E(authors))
 
-def shell(title, body, active='home', desc='Zijun Song’s homepage: agent RL, tool learning, post-training, and AI for Science.', path=''):
+def shell(title, body, active='home', desc='Zijun Song’s homepage: search-agent post-training and research notes.', path=''):
     depth = '../' if path.startswith('posts/') else './'
     items = [('home', '', 'About'), ('blog', 'blog.html', 'Blog'), ('projects', 'projects.html', 'Projects')]
     nav = ''.join(
@@ -178,7 +178,7 @@ home = f'''<main id="main" class="home-main">
   <div>
     <div class="eyebrow"><span class="tiny-dot"></span> ABOUT</div>
     <h1>Zijun Song<span class="profile-en">宋子骏</span></h1>
-    <p class="profile-role">PhD student · School of Advanced Interdisciplinary Sciences, UCAS<br>Institute of Automation, Chinese Academy of Sciences · Beijing</p>
+    <p class="profile-role">PhD student · School of Advanced Interdisciplinary Sciences, UCAS<br>Jointly trained with the Institute of Automation, CAS · Beijing</p>
     <div class="profile-links">
       <a href="mailto:2949203143@qq.com">Email</a>
       <a href="{SCHOLAR}" target="_blank" rel="noopener noreferrer">Scholar</a>
@@ -186,20 +186,19 @@ home = f'''<main id="main" class="home-main">
       <a href="blog.html">Blog</a>
     </div>
     <div class="profile-bio">
-      <p>I am Zijun Song, also known as Purple Nightmare. I am a PhD student at the School of Advanced Interdisciplinary Sciences, University of the Chinese Academy of Sciences, and I work with the <a href="https://www.ia.ac.cn/" target="_blank" rel="noopener noreferrer">Institute of Automation, CAS</a>.</p>
-      <p>My research focuses on <strong>AI agents</strong>, especially agent reinforcement learning, tool learning, and post-training: when search, tools, and external execution systems help a model do better, which capabilities can stay in the parameters and transfer to new tasks? Recent work includes fine-grained credit assignment for search agents, trigger-based supervision for continual training, and long-horizon exploration for edge-scale agents.</p>
-      <p>I also work on <strong>AI for Science</strong>. I am first author of PertDiffBench, a benchmark for diffusion models in single-cell perturbation response prediction.</p>
-      <p>I received my B.Eng. from the School of Software, Dalian University of Technology. Feel free to email me about methods, reproduction, or open-source work.</p>
+      <p>I am Zijun Song. I received my B.Eng. in Network Engineering from the School of Software, Dalian University of Technology, in 2025. As an undergraduate, I worked on wireless sensing with Wi-Fi, UWB, and millimeter-wave radar.</p>
+      <p>I am now a PhD student at the School of Advanced Interdisciplinary Sciences, University of the Chinese Academy of Sciences, jointly trained with the <a href="https://www.ia.ac.cn/" target="_blank" rel="noopener noreferrer">Institute of Automation, CAS</a>. I am advised by <a href="https://scholar.google.com/citations?user=RxvYlNQAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Prof. Dongbin Zhao</a>.</p>
+      <p>My current research focuses on <strong>post-training for search agents</strong>. At ModelBest (面壁智能), I worked on post-training for MiniCPM4 and AgentCPM-Explore. At Xiaomi, I worked on post-training for MiSearchAgent.</p>
     </div>
-    <div class="hero-topics"><span>AGENT RL</span><i></i><span>TOOL LEARNING</span><i></i><span>POST-TRAINING</span><i></i><span>AI4SCIENCE</span></div>
+    <div class="hero-topics"><span>SEARCH AGENT</span><i></i><span>POST-TRAINING</span><i></i><span>WIRELESS SENSING</span></div>
   </div>
 </section>
 <section class="home-section" id="experience">
   <div class="home-kicker">EXPERIENCE</div>
   <h2>Internships</h2>
   <div class="timeline">
-    <div class="timeline-item"><span class="when">TBD</span><div><h3>Research Intern, ModelBest (面壁智能)</h3><p>Details forthcoming.</p></div></div>
-    <div class="timeline-item"><span class="when">TBD</span><div><h3>Research Intern, Xiaomi</h3><p>Details forthcoming.</p></div></div>
+    <div class="timeline-item"><span class="when">TBD</span><div><h3>Research Intern, ModelBest (面壁智能)</h3><p>Post-training for MiniCPM4 and AgentCPM-Explore.</p></div></div>
+    <div class="timeline-item"><span class="when">TBD</span><div><h3>Research Intern, Xiaomi</h3><p>Post-training for MiSearchAgent.</p></div></div>
   </div>
 </section>
 <section class="home-section notes-section" id="blog">
