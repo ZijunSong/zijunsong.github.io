@@ -174,7 +174,7 @@ def pub_item(p):
 
 home = f'''<main id="main" class="home-main">
 <section class="profile" id="about">
-  <img class="profile-photo" src="Pics/ZijunSong.jpg" alt="Portrait of Zijun Song" width="200" height="240">
+  <img class="profile-photo" src="Pics/ZijunSong.jpg?v=20261103" alt="Portrait of Zijun Song" width="200" height="240">
   <div>
     <div class="eyebrow"><span class="tiny-dot"></span> ABOUT</div>
     <h1>Zijun Song</h1>
