@@ -146,7 +146,7 @@ def mark_me(authors):
 
 def shell(title, body, active='home', desc='Zijun Song’s homepage: search-agent post-training and research notes.', path=''):
     depth = '../' if path.startswith('posts/') else './'
-    items = [('home', '', 'About'), ('blog', 'blog.html', 'Blog'), ('projects', 'projects.html', 'Projects')]
+    items = [('home', '', 'About'), ('blog', 'blog.html', 'Blog')]
     nav = ''.join(
         f'<a href="{depth}{p}"' + (' aria-current="page"' if active == key else '') + f'>{label}</a>'
         for key, p, label in items
@@ -199,8 +199,7 @@ home = f'''<main id="main" class="home-main">
   <div class="timeline">
     <div class="timeline-item"><span class="when">2024.07 – 2025.10</span><div>
       <h3>Research Intern, LLM Agent / Tool Learning, ModelBest</h3>
-      <p>I worked on on-device LLM tool learning and agent post-training, contributing to MiniCPM4 and AgentCPM-Explore. I led or contributed to multi-turn MCP tool-calling data synthesis, SFT and AgentRL training, and the AgentToLeaP evaluation platform, improving tool selection, argument generation, multi-turn interaction, and long-horizon exploration.</p>
-      <p>I contributed to MiniCPM4 MCP tool-calling post-training and to the development and core evaluation of AgentCPM-Explore, supporting a 4B on-device agent that reached leading results on complex tool use and long-horizon exploration. Related publications include ToLeaP, Reflective Reinforcement Tool Learning, and the MiniCPM4 and AgentCPM-Explore technical reports.</p>
+      <p>I worked on on-device LLM tool learning and agent post-training, contributing to MiniCPM4’s MCP tool-calling post-training and the development and core evaluation of AgentCPM-Explore. I led or contributed to multi-turn MCP tool-calling data synthesis, SFT and AgentRL training, and the AgentToLeaP evaluation platform. This work improved tool selection, argument generation, and multi-turn interaction, supporting a 4B on-device agent that achieved leading results in complex tool use and long-horizon exploration. Related publications include ToLeaP, Reflective Reinforcement Tool Learning, and the MiniCPM4 and AgentCPM-Explore technical reports.</p>
     </div></div>
     <div class="timeline-item"><span class="when">2026.07 – Present</span><div>
       <h3>Search Agent Post-training Intern, Xiaomi</h3>
@@ -256,7 +255,7 @@ project_body = '''<main id="main" class="page-main"><div class="eyebrow">SELECTE
     '</channel></rss>',
     encoding='utf-8',
 )
-pages = ['', 'blog.html', 'projects.html'] + ['posts/' + p['slug'] + '.html' for p in BLOG_POSTS]
+pages = ['', 'blog.html'] + ['posts/' + p['slug'] + '.html' for p in BLOG_POSTS]
 (OUT / 'sitemap.xml').write_text('<?xml version="1.0" encoding="utf-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + ''.join('<url><loc>' + BASE + '/' + p + '</loc></url>' for p in pages) + '</urlset>', encoding='utf-8')
 (OUT / 'robots.txt').write_text('User-agent: *\nAllow: /\nSitemap: ' + BASE + '/sitemap.xml\n', encoding='utf-8')
 for name in ('Pics',):
