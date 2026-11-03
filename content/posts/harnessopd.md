@@ -10,7 +10,7 @@ A search agent's performance depends on more than the model. Harness components 
 
 Teacher and student share the same model backbone and differ only in the available harness. The student always samples under the simplified harness. The teacher runs advanced components on an isolated copy of the student's state and provides extra guidance.
 
-![Figure 1. HarnessOPD: isolated teacher execution, then action alignment to supervise the student.](../assets/figures/harnessopd-method.svg)
+![Figure 1. HarnessOPD: isolated teacher execution, then action alignment to supervise the student.](../assets/figures/harnessopd-method.png)
 
 The hard part is that **the teacher can take actions the student cannot execute.** We use two alignment paths:
 
@@ -23,7 +23,7 @@ These branches do not rewrite the student's real trajectory. Training combines a
 
 Under **GPT-OSS-20B + Harness-1**, after 200 training updates, HarnessOPD reaches a four-benchmark macro-average recall of **67.37%**, above the initial simplified system (**62.54%**) and the initial full-harness reference (**66.40%**). Average interaction turns drop from **20.91** for the initial student to **19.96**.
 
-![Figure 2. Recall and average interaction turns on four benchmarks, averaged over three evaluation seeds.](../assets/figures/harnessopd-results.svg)
+![Figure 2. Recall and average interaction turns on four benchmarks, averaged over three evaluation seeds.](../assets/figures/harnessopd-results.png)
 
 Recall here measures **how many relevant documents remain in the final evidence set**, not answer-string accuracy. Interaction turns are not the same as latency, token usage, or training cost. The four benchmarks are BrowseComp+, LongSealQA, FRAMES, and HotpotQA.
 

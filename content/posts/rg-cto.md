@@ -10,7 +10,7 @@ A quieter issue is that **a failed solution may still contain a correct strategy
 
 CTO lets the same frozen model score the next token under two conditions. The positive branch uses helpful experience. The negative branch is steered along a suspected-wrong line of thought, exposing generation tendencies tied to failure. Both branches share the same generated prefix, and only one continuation is sampled.
 
-![Figure 1. RG-CTO: estimate the reliability of negative experience, then filter items and scale the contrastive branch.](../assets/figures/rgcto-method.svg)
+![Figure 1. RG-CTO: estimate the reliability of negative experience, then filter items and scale the contrastive branch.](../assets/figures/rgcto-method.png)
 
 RG-CTO first checks each negative item with three signals:
 
@@ -24,7 +24,7 @@ Low-reliability items are filtered. The mean reliability of the remaining items 
 
 On the current revision's HMMT24 + Qwen3-4B-Thinking setup, mean Pass@1 after the third guided round is **59.7%** for RSE, **62.5%** for CTO, and **66.7%** for RG-CTO. Relative to RSE, which puts experience into the prompt, this is a **7.0 point** gain.
 
-![Figure 2. Method comparison and cumulative ablation on HMMT24, Qwen3-4B, Iter3, averaged over three seeds.](../assets/figures/rgcto-results.svg)
+![Figure 2. Method comparison and cumulative ablation on HMMT24, Qwen3-4B, Iter3, averaged over three seeds.](../assets/figures/rgcto-results.png)
 
 The main comparison generates 32 traces per problem per round, covering Iter0–Iter3. In the cumulative ablation, adding support, relevance, conflict estimation, and filtering in order raises the score from **62.5%** to **66.7%**. These are sequential gains, not independent module contributions. The right-hand axis is zoomed to make the differences visible.
 
